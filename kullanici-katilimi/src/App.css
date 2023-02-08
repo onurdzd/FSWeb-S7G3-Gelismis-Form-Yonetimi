@@ -1,0 +1,13 @@
+body {
+  text-align: center;
+}
+
+.labels {
+  display: block;
+  margin: 0 auto;
+}
+
+.error {
+  color: red;
+  font-weight: 700;
+}
