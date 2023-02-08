@@ -23,6 +23,7 @@ function App() {
     <div>
       <Form handlerPost={handlerPost}></Form>
       {postResponse.isim}
+      {postResponse && <pre>{JSON.stringify(postResponse, null, 2)}</pre>}
     </div>
   );
 }
