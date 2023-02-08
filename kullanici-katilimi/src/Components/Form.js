@@ -6,7 +6,7 @@ const initialValue = {
   isim: "",
   email: "",
   şifre: "",
-  şart: true,
+  şart: false,
 };
 
 const formSema = Yup.object({
@@ -21,7 +21,8 @@ const formSema = Yup.object({
   şart: Yup.boolean().oneOf([true], "Kabul etmeniz gereklidir"),
 });
 
-const Form = () => {
+const Form = (props) => {
+  const { handlerPost } = props;
   const [data, setData] = useState(initialValue);
   const [icerikler, setIcerikler] = useState([]);
   const [formError, setFormError] = useState({
@@ -58,6 +59,7 @@ const Form = () => {
     e.preventDefault();
     setIcerikler([...icerikler, data]);
     setData("");
+    handlerPost(icerikler[0]);
   };
 
   const handleClear = () => {
