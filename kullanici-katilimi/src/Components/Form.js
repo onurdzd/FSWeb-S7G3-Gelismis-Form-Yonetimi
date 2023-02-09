@@ -59,7 +59,7 @@ const Form = (props) => {
     e.preventDefault();
     setIcerikler([...icerikler, data]);
     setData("");
-    handlerPost(icerikler[0]);
+    handlerPost(icerikler);
   };
 
   const handleClear = () => {
