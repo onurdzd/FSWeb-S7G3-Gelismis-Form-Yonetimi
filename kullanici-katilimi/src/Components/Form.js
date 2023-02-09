@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import * as Yup from "yup";
 
@@ -31,11 +30,18 @@ const Form = (props) => {
     şifre: "",
     şart: "",
   });
+  const [toggle, setToggle] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setData({ ...data, [name]: type === "checkbox" ? checked : value });
     errorCheck(name, value, checked, type);
+    (data.isim !== "") &
+    (data.email !== "") &
+    (data.şifre !== "") &
+    (data.şart === true)
+      ? setToggle(true)
+      : setToggle(false);
   };
 
   const errorCheck = (name, value, checked, type) => {
@@ -68,10 +74,11 @@ const Form = (props) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form data-cy="submitForm" onSubmit={handleSubmit}>
         <label className="labels">
           İsim
           <input
+            data-cy="isimInput"
             type="text"
             name="isim"
             value={data.isim}
@@ -82,6 +89,7 @@ const Form = (props) => {
         <label className="labels">
           Email
           <input
+            data-cy="emailInput"
             type="email"
             name="email"
             value={data.email}
@@ -92,6 +100,7 @@ const Form = (props) => {
         <label className="labels">
           Şifre
           <input
+            data-cy="passwordInput"
             type="password"
             name="şifre"
             value={data.şifre}
@@ -102,6 +111,7 @@ const Form = (props) => {
         <label className="labels">
           Kullanım Şartları(Terms of Service)
           <input
+            data-cy="checkboxInput"
             className="labels"
             type="checkbox"
             name="şart"
@@ -110,8 +120,12 @@ const Form = (props) => {
           ></input>
         </label>
         <div className="error">{formError.şart}</div>
-        <button type="submit">Gönder</button>
-        <button type="button" onClick={handleClear}>
+        {toggle && (
+          <button data-cy="submitButton" type="submit">
+            Gönder
+          </button>
+        )}
+        <button data-cy="clearButton" type="button" onClick={handleClear}>
           Temizle
         </button>
       </form>
